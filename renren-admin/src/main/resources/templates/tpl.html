@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style type="text/css">
+        body {
+            font-family: SimSun;
+            font-size: 13px;
+        }
+
+        table {
+            margin: auto;
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th, td {
+            font-size: 13px;
+            margin-left: 5px;
+        }
+
+        .title_right p {
+            text-align: left;
+            margin: 0;
+            margin-left: 50%;
+            padding: 0;
+        }
+
+        @page {
+            size: A5 landscape;
+            margin: 0.15in
+        }
+
+        @bottom-center
+        {
+            content: "page " counter(
+                    page
+            ) " of  " counter(
+                    pages
+            )
+        ;
+        }
+
+        .signature {
+            margin: 0 auto;
+            clear: both;
+            align: center;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<h3 class="signature" style="margin-top: 10px;">南京艾迪康医学检验中心</h3>
+<h3 class="signature" style="margin-top: 10px;">检验报告</h3>
+<div>
+    <hr style="height:1px;border:none;border-top:2px solid #555555;"/>
+
+    <div>
+        <table style="font-size: 10px;">
+            <tr>
+                <td>姓&nbsp;&nbsp;名:</td>
+                <td>条&nbsp;形&nbsp;码:</td>
+                <td>门诊/住院号:</td>
+                <td colspan="2">送检单位:</td>
+            </tr>
+            <tr>
+                <td>性&nbsp;&nbsp;别:</td>
+                <td>样品性状:</td>
+                <td>科室/病区:</td>
+                <td colspan="2">临床印象:</td>
+            </tr>
+            <tr>
+                <td>年&nbsp;&nbsp;龄:</td>
+                <td>样品类型:</td>
+                <td>床号:</td>
+                <td>送检医生:</td>
+                <td>采集时间:</td>
+            </tr>
+        </table>
+        <hr style="height:1px;border:none;border-top:2px solid #555555;"/>
+        <div style="height: 320px;">
+            <table>
+                <tr>
+                    <td>简称</td>
+                    <td>项目</td>
+                    <td>结果</td>
+                    <td>提示</td>
+                    <td>单位</td>
+                    <td>参考区间</td>
+                </tr>
+                <#list nameList as item>
+                    <tr>
+                        <td>${item.shortHand!''}</td>
+                        <td>${item.item!''}</td>
+                        <td>${item.result!''}</td>
+                        <td>${item.tips!''}</td>
+                        <td>${item.unit!''}</td>
+                        <td>${item.interval!''}</td>
+                    </tr>
+                </#list>
+            </table>
+        </div>
+
+        <div style="height: 10px;">
+            <div>
+                <div style="text-align: left;width: 50%;float:left;">备注:/</div>
+                <div style="text-align: left;width: 50%;float:right;">院方条形码:/</div>
+            </div>
+            <br/>
+            <hr style="height:1px;border:none;border-top:2px solid #555555;"/>
+            <div>
+                <span>接收时间:2018-01-01 10:00</span>
+                <span style="margin-left: 20px;">报告时间:2018-01-01 10:00</span>
+                <span style="margin-left: 20px;">检验者:王伟伟</span>
+                <span style="margin-left: 20px;">审核者:王伟伟</span>
+                <span style="margin-left: 20px;">批准人:王伟伟</span>
+            </div>
+            本检测结果仅对来样负责，供临床参考。如有疑问请在样品保存期内提出！
+        </div>
+    </div>
+</div>
+</body>
+</html>

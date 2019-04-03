@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>管理员列表</title>
+<#include "/header.html">
+
+<style type="text/css">
+    .margin-input-30 {
+        margin-left: 30px
+    }
+    .row1 {
+        padding:10px 5px 0px 2px;
+        margin-bottom: 6px;
+    }
+    .margin-left-15{
+        margin-left: 15px
+    }
+    body{
+        font-size: 11px;
+    }
+
+</style>
+</head>
+<body>
+
+<div id="rrapp" v-cloak>
+    <div v-show="showList">
+        <form class="form-inline" style="margin-bottom: 6px;">
+            <div class="row1">
+                <div class="form-group  col-sm-4 form-group-sm">
+                    <label class="control-label ">送检日期</label>
+                    <input type="text" class="form-control lot-time"  id="sendExamineBeginTime">
+                    <label class="control-label ">~</label>
+                    <input type="text" class="form-control lot-time"  id="sendExamineEndTime">
+                </div>
+                <div class="form-group  form-group-sm col-sm-2">
+                    <label for="name" class=" control-label">门诊号</label>
+                    <input type="text" class="form-control " id="name" v-model="q.outPaientNo">
+                </div>
+                <div class="form-group  form-group-sm col-sm-2">
+                    <label for="name" class=" control-label">送检医生</label>
+                    <input type="text" class="form-control " id="doctor" v-model="q.doctor">
+                </div>
+            </div>
+            <br/>
+            <div class="row1">
+                <div class="form-group  form-group-sm col-sm-4">
+                    <label class="control-label ">报告日期</label>
+                    <input type="text" class="form-control lot-time"   id="reportBeginTime">
+                    <label class="control-label ">~</label>
+                    <input type="text" class="form-control lot-time"   id="reportEndTime">
+                </div>
+                <div class="form-group  form-group-sm col-sm-2">
+                    <label class=" control-label">条形码</label>
+                    <input type="text" class=" form-control" id="barCode" v-model="q.barCode">
+                </div>
+                <div class="form-group  form-group-sm col-sm-2">
+                    <label class=" control-label">病人姓名</label>
+                    <input type="text" class=" form-control" id="patientName" v-model="q.patientName">
+                </div>
+            </div>
+            <br/>
+            <div class="row1">
+                <div class="form-group form-group-sm margin-left-15">
+                    <label for="name" class=" control-label">报告类型</label>
+                    <select  type="text" class="form-control " id="reportType" v-model="q.reportType">
+                        <option>全部</option>
+                        <option>TCT</option>
+                        <option>TS</option>
+                        <option>病理</option>
+                        <option>常规报告</option>
+                        <option>两癌筛查</option>
+                        <option>生殖遗产</option>
+                        <option>唐筛</option>
+                        <option>微生物</option>
+                    </select>
+                </div>
+                &nbsp;&nbsp;&nbsp;
+                <div class="form-group form-group-sm margin-input-30">
+                    <label for="name" class=" control-label">是否正常报告</label>
+                    <select  type="text" class="form-control " id="normal" v-model="q.normal">
+                        <option>全部</option>
+                        <option>是</option>
+                        <option>否</option>
+                    </select>
+                </div>
+                &nbsp;&nbsp;&nbsp;
+                <div class="form-group form-group-sm margin-input-30">
+                    <label class="control-label ">打印状态</label>
+                    <select  type="text" class="form-control " id="printStatus" v-model="q.printStatus">
+                        <option>全部</option>
+                        <option>未打印</option>
+                        <option>已打印</option>
+                    </select>
+                </div>
+                &nbsp;&nbsp;&nbsp;
+                <div class="form-group form-group-sm margin-input-30">
+                    <label class="control-label ">仪器代号</label>
+                    <select  type="text" class="form-control " id="instrumentNo" v-model="q.instrumentNo">
+                        <option>全部</option>
+                        <option value="ACCESS">ACCESS</option>
+                        <option value="AU400">AU400</option>
+                        <option value="AXSYM">AXSYM</option>
+                        <option value="C8200">C8200</option>
+                        <option value="CIJI">CIJI</option>
+                        <option value="CIJI">CIJI</option>
+                        <option value="E411">E411</option>
+                        <option value="E601">E601</option>
+                        <option value="FCM">FCM</option>
+                        <option value="HIV">HIV</option>
+                        <option value="IMMAGE">IMMAGE</option>
+                        <option value="MDAC">MDAC</option>
+                        <option value="PCR">PCR</option>
+                        <option value="SA-6000">SA-6000</option>
+                        <option value="VARIANT">VARIANT</option>
+                        <option value="白带常规">白带常规</option>
+                        <option value="病理">病理</option>
+                    </select>
+                </div>
+                &nbsp;&nbsp;&nbsp;
+                <div class="form-group form-group-sm margin-input-30">
+                    <label class="control-label ">标本状态</label>
+                    <select  type="text" class="form-control " id="materialStatus" v-model="q.materialStatus">
+                        <option>全部</option>
+                        <option value="0">未审核</option>
+                        <option value="1">已初审</option>
+                        <option value="2">已审核</option>
+                        <option value="3">延迟</option>
+                        <option value="4">退检</option>
+                    </select>
+                </div>
+                <div  class="form-group form-group-sm margin-input-30">
+                    <label class="control-label ">打印选项：</label>
+                    <label class="radio-inline control-label">
+                        <input type="radio" name="printSelect" value="0">中心抬头
+                    </label>
+                    <label class="radio-inline ">
+                        <input type="radio" name="printSelect" value="1">客户抬头
+                    </label>
+
+                </div>
+                </div>
+            <div align="center">
+                <a class="btn btn-default btn-sm btn-primary" style="margin-left: 100px" @click="query">查询</a>
+                <a class="btn btn-default btn-sm btn-info" style="margin-left: 100px" @click="query">浏览</a>
+                <a class="btn btn-default btn-sm btn-success" style="margin-left: 100px" @click="query">打印</a>
+            </div>
+
+        </form>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+        <table id="jqGridDetail"></table>
+        <div id="jqGridPagerDetail"></div>
+
+    </div>
+
+<!-- 选择部门 -->
+<div id="deptLayer" style="display: none;padding:10px;">
+    <ul id="deptTree" class="ztree"></ul>
+</div>
+
+<script src="${request.contextPath}/statics/js/modules/assay/assay.js?_${.now?long}"></script>
+
+</body>
+</html>

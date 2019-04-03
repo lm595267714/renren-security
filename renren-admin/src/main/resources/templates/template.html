@@ -1,0 +1,91 @@
+<!--无用-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <style>
+        body{
+            font-family:SimSun;
+        }
+        .red{
+            color: red;
+        }
+        .color{
+            color: green;
+        }
+        .pos{
+            position:absolute;
+            left:200px;
+            top:5px;
+            width: 200px;
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+<!--<img src="http://localhost:8080/renren-admin/statics/css/logo.png" width="600px"/>-->
+<h3 align="center" style=" margin-top:5px;margin-bottom:5px">南京艾迪康医学检验中心</h3>
+<h3 align="center" style=" margin-top:5px;margin-bottom:5px">检验报告</h3>
+<strong>
+    <hr style="height:1px;border:none;border-top:1px solid #555555;margin-left:10px;margin-right:10px" />
+</strong>
+
+<table>
+    <tbody>
+    <tr>
+        <td width='120'>姓名：${name!'刘明'}</td>
+        <td width='150'>条形码：${barCode!'101010101'}</td>
+        <td width='150'>门诊号：${patientNo!'11111111'}</td>
+        <td width='300'>送检单位：${hospital!'南京鼓楼医院'}</td>
+    </tr>
+    <tr>
+        <td>性别：${name!'男'}</td>
+        <td>样品性状：${barCode!''}</td>
+        <td>科室：${barCode!'急诊'}</td>
+        <td>临床映象：${barCode!''}</td>
+    </tr>
+    <tr>
+        <td>年龄：${barCode!'30'}</td>
+        <td>样品类型：${barCode!''}</td>
+        <td>床号：${barCode!'101010101'}</td>
+        <td>采集时间：${barCode!'2018-10-09'}</td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <table>
+
+        <tr>
+            <td width='120'>简称</td>
+            <td width='400'>项目</td>
+            <td width='150'>结果</td>
+            <td width='100'>提示</td>
+            <td width='100'>单位</td>
+            <td width='300'>参考区间</td>
+        </tr>
+
+        <tr>
+            <td width='120'>IGg</td>
+            <td width='400'>戊型肝炎病毒抗体IgG</td>
+            <td width='150'>阴性</td>
+            <td width='100'></td>
+            <td width='100'>/</td>
+            <td width='300'>阴性</td>
+        </tr>
+        <#if assayList?exists>
+            <#list assayList as item>
+                <tr>
+                    <td>${item_index?if_exists+1}</td>
+                    <td>${item.name?if_exists}</td>
+                    <td>${item.content?if_exists}</td>
+                    <td>${item.unit?if_exists}</td>
+                    <td>${item.normalValue?if_exists}</td>
+                </tr>
+            </#list>
+        </#if>
+    </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.oss.dao.AssayDao">
+
+    <!--分页-->
+    <select id="queryPage" parameterType="io.renren.modules.oss.entity.AssayQueryDto" resultType="io.renren.modules.oss.entity.AssayEntity">
+        select '常规报告' as reportType,
+            t.barcode as barCode,
+            decode(substr(t.state, 3, 1), 5, '已完成', '进行中') sampleStatus,
+            t.patientname as patientName,
+            t.patientsex as sex,
+            t.getsampledate as examineTime,
+            t.patientage as age,
+            t.resultdate as reportTime,
+            t.printtime as printTimes,
+            t.doctorname as doctor,
+            t.doctordeptname department,
+            t.machinecode as instrumentNo,
+            t.patienttype as hosptial
+        from lis_test_reg t
+        where t.patientno = #{outPaientNo}
+        and t.barcode = #{barCode}
+        and t.patientname = #{patientName}
+        and t.getsampledate &gt; #{sendExamineBeginTime}
+        and t.getsampledate &lt; #{sendExamineEndTime}
+        and t.resultdate &gt; #{reportBeginTime}
+        and t.resultdate &lt; #{reportEndTime}
+    </select>
+    <!--分页统计-->
+    <select id="queryTotal" parameterType="io.renren.modules.oss.entity.AssayQueryDto" resultType="java.lang.Integer">
+
+    </select>
+
+
+</mapper>
